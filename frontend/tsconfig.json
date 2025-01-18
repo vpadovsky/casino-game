@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    // or "react-jsx" for React 17+ with the new JSX transform
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "esModuleInterop": true
+  }
+}
