@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getGames } from "../api/main";
 
 const GameList: React.FC = () => {
   const [games, setGames] = React.useState<Game[]>([]);
@@ -12,8 +12,12 @@ const GameList: React.FC = () => {
   const fetchGames = async () => {
     try {
       const endpoint = search ? `/games/search?q=${search}` : '/games';
-      const response = await axios.get(`http://localhost:3000${endpoint}`);
-      setGames(response.data);
+
+        getGames(endpoint).then((data) => {
+            console.log('data', data);
+            setGames(data.data);
+        });
+
     } catch (error) {
       console.error('Error fetching games:', error);
     }

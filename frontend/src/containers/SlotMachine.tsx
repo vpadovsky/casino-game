@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { setSpin } from "../api/main";
 
 const SlotMachine = () => {
   const [balance, setBalance] = useState(20);
   const [result, setResult] = useState([]);
   const [winnings, setWinnings] = useState(0);
 
-  console.log('balance', balance);
-
   const spinSlot = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/slot/spin');
-      console.log('response', response.data);
+      const response = await setSpin();
       setResult(response.data.result);
       setWinnings(response.data.winnings);
-      // console.log('BE balance', response.data.balance)
       response.data.winnings > 0
         ? setBalance((prevState) => prevState - 1 + response.data.winnings)
         : setBalance((prevState) => prevState - 1);
@@ -23,8 +19,6 @@ const SlotMachine = () => {
     }
   };
 
-  console.log('result', result);
-
   const emojiMap = {
     lemon: '🍋',
     apple: '🍎',
@@ -32,7 +26,7 @@ const SlotMachine = () => {
     banana: '🍌',
   };
 
-  //Get emojis against words
+  //Get emojis from words
   const updatedResult = result.map((item) =>
     item
       .split(/,\s*/)

@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { getCurrencyConvert } from "../api/main";
 
 const CurrencyConverter: React.FC = () => {
-  const [balance, setBalance] = useState<number>(20);
+  const BALANCE_INIT_QUANTITY = 20;
+  const balance = BALANCE_INIT_QUANTITY;
   const [convertedBalance, setConvertedBalance] = useState<string | null>(null);
   const [currency, setCurrency] = useState<string>('EUR');
-  console.log('convertedBalance', convertedBalance);
+
   const convertCurrency = async () => {
     try {
-      //TODO: move api
-      const response = await axios.get(
-        'http://localhost:3000/currency/convert',
-        {
-          params: { amount: balance, to: currency },
-        }
-      );
-      setConvertedBalance(response.data.converted);
+        getCurrencyConvert(balance, currency).then((data) => {
+            console.log('data', data);
+            setConvertedBalance(data.data.converted);
+        });
     } catch (error) {
       console.error('Error converting currency:', error);
     }
