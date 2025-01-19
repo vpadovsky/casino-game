@@ -5,6 +5,7 @@ import CurrencyConverter from './containers/CurrencyConverter';
 import Header from "./components/Header";
 
 const App: React.FC = () => {
+    console.log("API URL:", process.env.REACT_APP_API_URL);
     return (
         <div className="min-h-screen bg-gray-100 p-4 container mx-auto">
             <Header/>
