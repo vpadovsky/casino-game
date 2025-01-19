@@ -4,7 +4,8 @@ import { getGames } from "../api/main";
 const GameList: React.FC = () => {
   const [games, setGames] = React.useState<Game[]>([]);
   const [search, setSearch] = useState('');
-  console.log('games', games);
+  console.log('games---', games);
+    console.log("API URL:1", process.env.REACT_APP_API_URL);
   useEffect(() => {
     fetchGames();
   }, [search]);

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+console.log("API URL:2", process.env.REACT_APP_API_URL);
 
 export const getGames = (endpoint: string) => axios.get(REACT_APP_API_URL + endpoint);
 
